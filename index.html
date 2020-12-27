@@ -1,0 +1,76 @@
+<html>
+
+
+<head>
+    <!-- Load TensorFlow.js. This is required to use coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- Load the coco-ssd model. -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <h4 class="mt-4 mb-5  border-bottom">物体検出アプリ</h4>
+    <!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
+    <script src="index.js"></script>
+
+    <p>
+        <input type="file" onchange="onFileSelected(this)">
+    </p>
+
+    <div class ="input_canvas">
+        <p>
+            <canvas id="test_canvas" width=256 height=256 style="border: 2px solid;"></canvas>
+            <button type="button"  onclick="updatePredictions()"><img src="run.jpeg"></button>
+        </p>
+    </div>
+
+    <table class='table'>
+        <tbody>
+            <tr>
+                <td>画像ファイル</td>
+                <td id ="file_name"></td>
+                </tr>
+            <tr>
+                <td>推定ラベル</td>
+                <td id ="label_name"></td>
+            </tr>
+            <tr>
+                <td>推定確率</td>
+                <td id ="percent"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script>
+
+
+
+    //const img = document.getElementById('test_canvas');
+    function updatePredictions(){
+
+        const ctx = document.getElementById('test_canvas').getContext('2d')
+        //console.log(ctx);
+        const imgData = ctx.getImageData(0, 0, 256, 256);
+        //console.log(imgData);
+        // Load the model.
+        cocoSsd.load().then(model => {
+            // detect objects in the image.
+            model.detect(imgData).then(predictions => {
+            //console.log('Predictions: ', predictions[0].score);
+            var element = document.getElementById('label_name');
+            element.innerHTML = predictions[0].class;
+
+            var element = document.getElementById('percent');
+            element.innerHTML = Math.round(predictions[0].score*100)+'%';
+
+            });
+        });
+    }
+    </script>
+
+</body>
+
+</html>

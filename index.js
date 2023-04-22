@@ -1,15 +1,17 @@
-const inputElement = document.getElementById("file");
+if (typeof document !== "undefined") {
+  const inputElement = document.getElementById("file");
 
-inputElement.addEventListener("change", () => {
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const img = new Image();
-    img.onload = (e) => setImage(e.target);
-    img.src = e.target.result;
-  };
+  inputElement.addEventListener("change", () => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = (e) => setImage(e.target);
+      img.src = e.target.result;
+    };
 
-  reader.readAsDataURL(inputElement.files[0]);
-});
+    reader.readAsDataURL(inputElement.files[0]);
+  });
+}
 
 function _updatePredictions() {
   const canvas = document.getElementById("canvas").getContext("2d");

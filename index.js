@@ -26,7 +26,7 @@ function _updatePredictions() {
   });
 }
 
-function setImage(img) {
+export function setImage(img) {
   const ct = document.getElementById("canvas").getContext("2d");
   ct.drawImage(img, 0, 0, canvas.width, canvas.height);
 

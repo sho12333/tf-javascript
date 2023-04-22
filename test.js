@@ -1,5 +1,5 @@
 import { assert } from "https://deno.land/std@0.184.0/testing/asserts.ts";
-import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
+import { DOMParser } from "https://deno.land/x/deno_dom@v0.1.38/deno-dom-wasm.ts";
 
 Deno.test("set image", () => {
   const document = new DOMParser().parseFromString(

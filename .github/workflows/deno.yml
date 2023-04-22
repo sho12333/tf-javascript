@@ -58,4 +58,4 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "sho12333-tf-javascript"
-          entrypoint: "./index.html" # TODO: update entrypoint      
+          entrypoint: "../../index.js" # TODO: update entrypoint      

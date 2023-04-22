@@ -11,7 +11,7 @@ inputElement.addEventListener("change", () => {
   reader.readAsDataURL(inputElement.files[0]);
 });
 
-function updatePredictions() {
+function _updatePredictions() {
   const canvas = document.getElementById("canvas").getContext("2d");
   const imgData = canvas.getImageData(0, 0, 256, 256);
 
